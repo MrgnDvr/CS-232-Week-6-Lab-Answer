@@ -1,0 +1,60 @@
+#include<iostream>
+using namespace std;
+struct scoresNode {
+int score; //item of the node
+scoresNode* link; //link to another node
+};
+int main() {
+//declarations
+int numOfScores;
+int cnt;
+scoresNode* head = new scoresNode;
+head->link = nullptr;
+scoresNode* nextScoresNode = new scoresNode;
+nextScoresNode = head;
+//get user input
+cout << "How many ages are you going to enter: ";
+cin >> numOfScores;
+//calculation
+for (int i = 0; i < numOfScores; i++)
+{
+if (i > 0) {
+nextScoresNode->link = new scoresNode;
+nextScoresNode = nextScoresNode->link;
+nextScoresNode->link = nullptr;
+}
+cout << "Enter score " << (i + 1) << ": ";
+cin >> nextScoresNode->score;
+}
+//output
+//traverse the linked list and display its contents
+cout << endl << "Traversing the linked list" << endl;
+nextScoresNode = head;
+cnt = 1;
+while (nextScoresNode != nullptr) {
+cout << "Score " << cnt << ": " << nextScoresNode->score << endl;
+nextScoresNode = nextScoresNode->link;
+cnt += 1;
+}
+//double the current score values
+cout << endl << "Results of doubling the scores:" << endl;
+nextScoresNode = head;
+cnt = 1;
+while (nextScoresNode != nullptr) {
+nextScoresNode->score = nextScoresNode->score * 2;
+cout << "Score " << cnt << " doubled is: " << nextScoresNode->score <<
+endl;
+nextScoresNode = nextScoresNode->link;
+cnt += 1;
+}
+//delete all of the nodes
+nextScoresNode = head;
+while (nextScoresNode != nullptr) {
+scoresNode* nodeToDelete = nextScoresNode;
+nextScoresNode = nextScoresNode->link;
+delete nodeToDelete;
+nodeToDelete = nullptr;
+}
+head = nullptr;
+return 0;
+}
